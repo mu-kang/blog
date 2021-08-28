@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content=" web前端，博客，JavaScript，vue" />
+    <link rel="icon" sizes="any" mask href="/public/blog/images/scribble.png" />
+    <meta
+      name="description"
+      content="这是一个个人博客网站，博主是一名前端开发人员"
+    />
+    <link rel="stylesheet" href="/public/blog/stylesheets/style.css" />
+    <script src="/public/blog/javascript/click.js"></script>
+    <title>MuKang</title>
+    <style>
+      body .link:hover {
+        background: url("/public/blog/images/line.png") repeat-x left bottom;
+      }
+    </style>
+  </head>
+  <body class="lh-copy dark-gray pa0 f6 sans-serif bg-super-white">
+    <%- include('template/header',{about: about}); -%>
+    <div class="mw7 bg-white mt4 mb3 center br2-ns bt bb ba-ns b--light-gray">
+      <%- include('template/nav'); -%>
+
+      <main class="tl f6 relative pa4 pa5-ns overflow-hidden">
+        <div class="markdown-body">
+          <ul class="list pa0">
+            <% for(var i = 0;i < result.length;i++){ %>
+            <li class="mv2">
+              <a
+                href="/detail/<%= result[i].blogId %>"
+                class="db pv1 link blue hover-mid-gray"
+              >
+                <time class="fr silver ttu"><%= result[i].createdTime %></time>
+                <%= result[i].title %>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+      </main>
+    </div>
+    <%- include('template/footer'); -%>
+  </body>
+</html>

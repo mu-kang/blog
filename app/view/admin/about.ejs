@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <%- include('template/head'); -%>
+  </head>
+  <body>
+    <div class="layui-layout layui-layout-admin">
+      <%- include('template/nav',{url:'/admin/about'}); -%>
+
+      <div class="main">
+        <form class="layui-form" action="">
+          <input
+            type="hidden"
+            name="aboutId"
+            value="<%= result.aboutId %>"
+            placeholder="请输入..."
+            autocomplete="off"
+            class="layui-input"
+          />
+          <div class="layui-form-item">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="nick"
+                value="<%= result.nick %>"
+                required
+                lay-verify="required"
+                placeholder="请输入..."
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">QQ</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="qq"
+                value="<%= result.qq %>"
+                required
+                lay-verify="required"
+                placeholder="请输入..."
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+
+          <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="email"
+                value="<%= result.email %>"
+                required
+                lay-verify="required"
+                placeholder="请输入..."
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">自我介绍</label>
+            <div class="layui-input-block">
+              <textarea
+                name="describe"
+                required
+                lay-verify="required"
+                placeholder="请输入..."
+                autocomplete="off"
+                class="layui-textarea"
+              >
+<%= result.describe %></textarea
+              >
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">github</label>
+            <div class="layui-input-block">
+              <input
+                type="text"
+                name="github"
+                value="<%= result.github %>"
+                required
+                lay-verify="required"
+                placeholder="请输入..."
+                autocomplete="off"
+                class="layui-input"
+              />
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">logo</label>
+            <div class="layui-input-block">
+              <div class="layui-upload-drag" id="test10">
+                <i class="layui-icon"></i>
+                <p>点击上传，或将文件拖拽到此处</p>
+                <div
+                  class="<%= result.logo?'':'layui-hide' %>"
+                  id="uploadDemoView"
+                >
+                  <hr />
+                  <img
+                    src="<%= result.logo %>"
+                    alt="上传成功后渲染"
+                    style="max-width: 196px"
+                  />
+                  <input
+                    type="hidden"
+                    name="logo"
+                    value="<%= result.logo %>"
+                    required
+                    id="logo"
+                    lay-verify="required"
+                    placeholder="请输入..."
+                    autocomplete="off"
+                    class="layui-input"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">alipay</label>
+            <div class="layui-input-block">
+              <div class="layui-upload-drag" id="test11">
+                <i class="layui-icon"></i>
+                <p>点击上传，或将文件拖拽到此处</p>
+                <div
+                  class="<%= result.alipay?'':'layui-hide' %>"
+                  id="uploadDemoView1"
+                >
+                  <hr />
+                  <img
+                    src="<%= result.alipay %>"
+                    alt="上传成功后渲染"
+                    style="max-width: 196px"
+                  />
+                  <input
+                    type="hidden"
+                    name="alipay"
+                    value="<%= result.alipay %>"
+                    required
+                    id="logo1"
+                    lay-verify="required"
+                    placeholder="请输入..."
+                    autocomplete="off"
+                    class="layui-input"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <label class="layui-form-label">wechatpay</label>
+            <div class="layui-input-block">
+              <div class="layui-upload-drag" id="test12">
+                <i class="layui-icon"></i>
+                <p>点击上传，或将文件拖拽到此处</p>
+                <div
+                  class="<%= result.wechatpay?'':'layui-hide' %>"
+                  id="uploadDemoView2"
+                >
+                  <hr />
+                  <img
+                    src="<%= result.wechatpay %>"
+                    alt="上传成功后渲染"
+                    style="max-width: 196px"
+                  />
+                  <input
+                    type="hidden"
+                    name="wechatpay"
+                    value="<%= result.wechatpay %>"
+                    required
+                    id="logo2"
+                    lay-verify="required"
+                    placeholder="请输入..."
+                    autocomplete="off"
+                    class="layui-input"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <button class="layui-btn" lay-submit lay-filter="formDemo">
+                立即提交
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      $(function () {
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use("element", function () {
+          var element = layui.element;
+
+          //…
+        });
+        layui.use("upload", function () {
+          var upload = layui.upload;
+
+          //执行实例
+          var uploadInst1 = upload.render({
+            //拖拽上传
+            elem: "#test10",
+            url: "/admin/blog/upload?_csrf=" + $.cookie("csrfToken"), //上传接口
+            done: function (res) {
+              layer.msg("上传成功");
+              layui
+                .$("#uploadDemoView")
+                .removeClass("layui-hide")
+                .find("img")
+                .attr("src", res.data.url);
+              layui.$("#logo").val(res.data.url);
+              console.log(res);
+            },
+          });
+          //执行实例
+          var uploadInst2 = upload.render({
+            //拖拽上传
+            elem: "#test11",
+            url: "/admin/blog/upload?_csrf=" + $.cookie("csrfToken"), //上传接口
+            done: function (res) {
+              layer.msg("上传成功");
+              layui
+                .$("#uploadDemoView1")
+                .removeClass("layui-hide")
+                .find("img")
+                .attr("src", res.data.url);
+              layui.$("#logo1").val(res.data.url);
+              console.log(res);
+            },
+          });
+          //执行实例
+          var uploadInst = upload.render({
+            //拖拽上传
+            elem: "#test12",
+            url: "/admin/blog/upload?_csrf=" + $.cookie("csrfToken"), //上传接口
+            done: function (res) {
+              layer.msg("上传成功");
+              layui
+                .$("#uploadDemoView2")
+                .removeClass("layui-hide")
+                .find("img")
+                .attr("src", res.data.url);
+              layui.$("#logo2").val(res.data.url);
+              console.log(res);
+            },
+          });
+        });
+
+        layui.use("form", function () {
+          var form = layui.form;
+
+          //监听提交
+          form.on("submit(formDemo)", function (data) {
+            $.ajax({
+              type: "POST",
+              url: "/admin/about/edit?_csrf=" + $.cookie("csrfToken"),
+              xhrFields: { withCredentials: true },
+              data: data.field,
+              success(result) {
+                layer.msg(result.message, function () {
+                  if (result.code === 200) {
+                    window.location.reload();
+                  }
+                });
+              },
+            });
+            return false;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

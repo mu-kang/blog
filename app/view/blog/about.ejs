@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/public/blog/stylesheets/style.css" />
+    <script src="/public/blog/javascript/click.js"></script>
+    <meta name="keywords" content="web前端，博客，JavaScript，vue" />
+    <link rel="icon" sizes="any" mask href="/public/blog/images/scribble.png" />
+    <meta
+      name="description"
+      content="这是一个个人博客网站，博主是一名前端开发人员"
+    />
+    <title>MuKang</title>
+  </head>
+  <body class="lh-copy dark-gray pa0 f6 sans-serif bg-super-white">
+    <%- include('template/header',{about:result}); -%>
+    <div class="mw7 bg-white mt4 mb3 center br2-ns bt bb ba-ns b--light-gray">
+      <%- include('template/nav'); -%>
+
+      <main class="tl f6 relative pa4 pa5-ns overflow-hidden">
+        <div class="mb4">
+          <h1 class="ttu f3 mt0 lh-title cb mb2">About me</h1>
+        </div>
+        <div class="markdown-body">
+          <p><%= result.describe%></p>
+          <p>QQ： <a href="JavaScript:void(0)"><%= result.qq%></a></p>
+          <p>
+            Email： <a href="mailto:<%= result.email%>"><%= result.email%></a>
+          </p>
+          <p>Github： <a href="<%= result.github%>">GitHub</a></p>
+          <p>Blog： <a href="/">我的博客</a></p>
+        </div>
+      </main>
+    </div>
+    <%- include('template/footer'); -%>
+  </body>
+</html>

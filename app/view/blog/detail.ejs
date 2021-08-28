@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="keywords" content=" web前端，博客，JavaScript，vue" />
+    <link rel="icon" sizes="any" mask href="/public/blog/images/scribble.png" />
+    <meta
+      name="description"
+      content="这是一个个人博客网站，博主是一名前端开发人员"
+    />
+    <link rel="stylesheet" href="/public/blog/stylesheets/style.css" />
+    <script src="/public/admin/jquery.js"></script>
+    <link rel="stylesheet" href="/public/admin/editormd/editormd.css" />
+    <script src="/public/admin/editormd/lib/marked.min.js"></script>
+    <script src="/public/admin/editormd/lib/prettify.min.js"></script>
+    <script src="/public/admin/editormd/lib/raphael.min.js"></script>
+    <script src="/public/admin/editormd/lib/underscore.min.js"></script>
+    <script src="/public/admin/editormd/lib/sequence-diagram.min.js"></script>
+    <script src="/public/admin/editormd/lib/flowchart.min.js"></script>
+    <script src="/public/admin/editormd/lib/jquery.flowchart.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/public/admin/editormd/editormd.js"
+    ></script>
+    <script src="/public/blog/javascript/click.js"></script>
+    <title>MuKang</title>
+    <style>
+      .paycode img {
+        width: 10rem;
+      }
+
+      @media screen and (min-width: 60em) {
+        .fixed-l {
+          z-index: 5;
+        }
+
+        main.relative {
+          z-index: 12;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="lh-copy dark-gray pa0 f6 sans-serif bg-super-white">
+    <%- include('template/header',{about:about}); -%>
+    <div class="mw7 bg-white mt4 mb3 center br2-ns bt bb ba-ns b--light-gray">
+      <%- include('template/nav'); -%>
+
+      <main
+        class="tl f6 relative pa4 pa5-ns overflow-hidden"
+        style="z-index: 6"
+      >
+        <div class="mb4">
+          <div class="fw600 light-silver mt1">
+            <%= result.details.createdAt %>
+          </div>
+          <h1 class="ttu f3 mt0 lh-title cb mb2">
+            <%= result.details.title %>
+          </h1>
+        </div>
+
+        <div class="markdown-body">
+          <div id="detail" style="display: none">
+            <%= result.details.content %>
+          </div>
+          <div id="test-editormd-view"></div>
+        </div>
+        <p class="mt4">
+          <strong
+            >意思不意思那是你的意思，博客我会一直更新下去的0.0，谢谢！</strong
+          >
+        </p>
+        <div class="bb b--light-gray pv4 tc paycode">
+          <a
+            class="link blue hover-mid-gray mh2 pv1"
+            href="JavaScript:void (0)"
+          >
+            <img src="<%= about.wechatpay%>" alt="" />
+          </a>
+          <a
+            class="link blue hover-mid-gray mh2 pv1"
+            href="JavaScript:void (0)"
+          >
+            <img src="<%= about.alipay%>" alt="" />
+          </a>
+        </div>
+        <p class="mt4">
+          Current time ,<br />
+          This
+          <span class="silver"> <%= result.time %> </span>
+        </p>
+        <img src="/public/blog/images/scribble3.png" alt="scribble" />
+      </main>
+      <section class="fixed-l mw7 center w-100 top-50 tc pb4 nt4">
+        <% if(result.pre&&result.pre.blogId) { %>
+        <a
+          href="/detail/<%= result.pre.blogId %>"
+          class="no-underline f1 light-blue hover-silver nl5 fl-l ph3"
+          >‹</a
+        >
+        <% } %> <% if(result.next&&result.next.blogId) { %>
+        <a
+          href="/detail/<%= result.next.blogId %>"
+          class="no-underline f1 light-blue hover-silver nr5 fr-l ph3"
+          >›</a
+        >
+        <% } %>
+      </section>
+    </div>
+    <%- include('template/footer'); -%>
+    <script>
+      $(function () {
+        const markdown = $("#detail").text();
+        var testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+          markdown: " <%= result.details.content %>", //+ "\r\n" + $("#append-test").text(),
+          //htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+          htmlDecode: "style,script,iframe", // you can filter tags decode
+          //toc             : false,
+          tocm: true, // Using [TOCM]
+          //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+          //gfm             : false,
+          //tocDropdown     : true,
+          // markdownSourceCode : true, // 是否保留 Markdown 源码，即是否删除保存源码的 Textarea 标签
+          emoji: true,
+          taskList: true,
+          tex: true, // 默认不解析
+          flowChart: true, // 默认不解析
+          sequenceDiagram: true, // 默认不解析
+        });
+      });
+    </script>
+  </body>
+</html>

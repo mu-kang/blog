@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <%- include('template/head'); -%>
+    <script>
+      layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+
+      });
+      var handleStatus = function( status, blogId) {
+        var statusTxt =  status  ? '冻结' : '开启';
+        layer.confirm('真的'+statusTxt+'么', function(index) {
+          $.ajax({
+            type: 'POST',
+            url: '/admin/blog/status?_csrf=' + $.cookie('csrfToken'),
+            xhrFields: { withCredentials: true },
+            data: { status: status ?false:true, blogId},
+            success(result) {
+              layer.msg(result.message, function() {
+                if (result.code === 200) {
+                  window.location.reload()
+                }
+              });
+            }
+          });
+          //layer.msg(JSO
+          //layer.close(index);
+          //向服务端发送删除指令
+        });
+      };
+
+    </script>
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <%- include('template/nav',{url:'/admin/blog'}); -%>
+
+</div>
+<div class="main">
+    <div class="addbtn">
+        <a type="button" href="/admin/blog/edit" class="layui-btn layui-btn-sm layui-btn-normal ">新增博客</a>
+    </div>
+    <table class="layui-table">
+        <colgroup>
+            <col width="150">
+            <col width="200">
+            <col>
+        </colgroup>
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>标题</th>
+                       <th>阅读量</th>
+            <th>创建时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(var i = 0;i < result.length;i++){ %>
+            <tr>
+                <td><%= result[i].blogId %></td>
+                <td><%= result[i].title %></td>
+                <td><%= result[i].reads %></td>
+                <td><%= result[i].createdTime %></td>
+                <td><%= result[i].status ? '开启' : '冻结' %></td>
+                <td><a class="layui-btn layui-btn-xs" lay-event="edit" href="/admin/blog/edit/<%= result[i].blogId %>">编辑</a>
+                    <a class="layui-btn <%= result[i].status ? 'layui-btn-danger':'layui-btn-normal'   %>  layui-btn-xs"
+                       lay-event="<%= result[i].status ? 'edit2':'edit1'  %>"
+                       onclick="handleStatus(<%= result[i].status %>,<%= result[i].blogId %>)"><%= result[i].status  ? '冻结' : '开启' %></a>
+                </td>
+            </tr>
+        <% } %>
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
