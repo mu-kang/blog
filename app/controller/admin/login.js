@@ -19,7 +19,6 @@ class LoginController extends Controller {
   async from() {
     const { ctx } = this;
     const { username, password } = ctx.request.body;
-    await ctx.service.admin.user.create("root", "root");
     let result = await ctx.service.admin.user.login(username, password);
     if (result && result.userId) {
       await ctx.service.admin.record.create(username, ctx.request.ip);
